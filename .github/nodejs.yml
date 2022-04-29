@@ -1,0 +1,44 @@
+name: Study-docs CI
+
+# 触发条件：在 push 到 master 分支后
+on:
+  push:
+    branches:
+      - master
+
+# 任务
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 服务器环境：最新版 Ubuntu
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 1. set environment Node.js pnpm
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: 2. install dep
+        run: |
+            rm -rf node_modules
+            pnpm install
+            pnpm build
+          env:
+            CI: true
+      
+      - name: 3. script deploy
+        env:
+          ACCESS_TOKEN_DEPLOY: ${{secrets.STUDY_DOCS_TOKEN}}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./src/.vuepress/dist
+        run: |
+          chmod +x ./scripts/deploy.sh
+          bash ./scripts/deploy.sh
