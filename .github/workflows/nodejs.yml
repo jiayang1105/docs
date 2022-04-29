@@ -18,13 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 1. set environment Node.js pnpm
+      - name: 1. Setup environment Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      
+      - name: 1.1 Setup environment pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
+        
       - name: 2. install dep
         run: |
             rm -rf node_modules
