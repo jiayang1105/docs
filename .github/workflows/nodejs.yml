@@ -18,10 +18,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 1. Setup environment Node.js pnpm
+      # - name: 1. Setup environment Node.js pnpm
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #   uses: pnpm/action-setup@v2
+      #   with:
+      #     version: latest
+
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "14"  # 选择要使用的 node 版本
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
