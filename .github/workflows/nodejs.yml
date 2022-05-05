@@ -16,12 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0      # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "14" # 选择要使用的 node 版本
+          node-version: "14"  # 选择要使用的 node 版本
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -55,6 +55,6 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ACCESS_TOKEN: ${{ secrets.STUDY_DOCS_TOKEN }} # 读取 GitHub 仓库 secrets 的 ACCESS_TOKEN 变量
-          BRANCH: gh-pages # 部署分支 gh-pages
-          FOLDER: ./src/.vuepress/dist # 需要部署的文件在 .vuepress/dist 路径
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # 读取 GitHub 仓库 secrets 的 ACCESS_TOKEN 变量
+          BRANCH: gh-pages                           # 部署分支 gh-pages
+          FOLDER: ./src/.vuepress/dist                     # 需要部署的文件在 .vuepress/dist 路径
