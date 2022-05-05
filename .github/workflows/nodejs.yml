@@ -56,5 +56,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.DOCS_TOKEN }}  # 读取 GitHub 仓库 secrets 的 ACCESS_TOKEN 变量
-          BRANCH: gh-pages                           # 部署分支 gh-pages
+          BRANCH: master                         # 部署分支 gh-pages
           FOLDER: ./src/.vuepress/dist                     # 需要部署的文件在 .vuepress/dist 路径
