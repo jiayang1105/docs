@@ -55,11 +55,10 @@ jobs:
         env:
           DOC_ENV: preview
 
-      - name: script deploy
-        env:
-          ACCESS_TOKEN_DEPLOY: ${{secrets.STUDY_DOCS_TOKEN}}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./src/.vuepress/dist
-        run: |
-          chmod +x ./scripts/deploy.sh
-          bash ./scripts/deploy.sh
+      # 部署到 GitHub Pages
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{secrets.STUDY_DOCS_TOKEN}}
+          BRANCH: gh-pages
+          FOLDER: ./src/.vuepress/dist
