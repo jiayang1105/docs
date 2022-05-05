@@ -21,7 +21,7 @@ fi
 # 进入到build的目录
 cd "${PUBLISH_DIR}" # ./src/.vuepress/dist
 
-# TODO (.yml该字段未设置,暂时还没自己的域名 so就不生成CNAME 了, 后续再说)为gh-pages 生成CNAME
+# TODO (.yml该字段未设置,暂时还没自己的域名 so就不生成CNAME 了, 后续再说)为gh-pages   生成CNAME
 
 # 设置CNAME
 if [ -n "${CNAME}" ]; then 
