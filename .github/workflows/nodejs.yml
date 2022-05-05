@@ -21,12 +21,7 @@ jobs:
       - name: 1. Setup environment Node.js pnpm
         uses: actions/setup-node@v1
         with:
-          node-version: "14" 
-        
-        name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
+          node-version: ${{ matrix.node-version }}
         
       - name: 2. install dep
         run: |
