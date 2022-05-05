@@ -16,14 +16,23 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v3
+      # 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0      # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
 
-      - name: 1. Setup environment Node.js pnpm
+      - name: Setup environment Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        
-      - name: 2. install dep
+
+      - name: Setup pnpm  
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: install dep
         run: |
             rm -rf node_modules
             pnpm install
@@ -31,7 +40,7 @@ jobs:
           env:
             CI: true
       
-      - name: 3. script deploy
+      - name: script deploy
         env:
           ACCESS_TOKEN_DEPLOY: ${{secrets.STUDY_DOCS_TOKEN}}
           PUBLISH_BRANCH: gh-pages
